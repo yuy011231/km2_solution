@@ -1,0 +1,6 @@
+matplotlib>=3.9.2,<4.0.0
+customtkinter==5.2.2      
+numpy==1.26.4
+pandas==2.2.2
+scipy==1.14.0
+git+https://github.com/yuy011231/km2_svd.git@main#egg=km2_svd
