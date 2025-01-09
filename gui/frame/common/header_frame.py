@@ -3,7 +3,7 @@ import customtkinter as ctk
 import os
 from common.config import Config
 
-class HeadderFrame(ctk.CTkFrame):
+class HeaderFrame(ctk.CTkFrame):
     def __init__(self, *args, header_name="ReadFileFrame", **kwargs):
         super().__init__(*args, **kwargs)
         
@@ -42,7 +42,7 @@ class HeadderFrame(ctk.CTkFrame):
         選択ボタンが押されたときのコールバック。ファイル選択ダイアログを表示する
         """
         # エクスプローラーを表示してファイルを選択する
-        file_name = HeadderFrame.file_read()
+        file_name = HeaderFrame.file_read()
 
         if file_name is not None:
             # ファイルパスをテキストボックスに記入
@@ -57,6 +57,7 @@ class HeadderFrame(ctk.CTkFrame):
         # 裏で計算準備
         file_name = self.textbox.get()
         self.master.km2_svd_power_visualize(file_name)
+        self.master.km2_svd_row_data_visualize(file_name)
             
     @staticmethod
     def file_read():
