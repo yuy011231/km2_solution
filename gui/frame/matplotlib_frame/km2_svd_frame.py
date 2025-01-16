@@ -16,9 +16,9 @@ class Km2SvdFrame(MatplotlibFrame):
         plotter.plot()
         self.redraw()
         
-    def power_plot(self, path, peak_threshold, s_window_size):
+    def power_plot(self, path, s_window_size):
         reader = ItcReader(path)
-        svd=SvdCalculator(reader, peak_threshold, s_window_size)
+        svd=SvdCalculator(reader, s_window_size)
         plotter=svd.get_power_plotter(ax=self.ax)
         plotter.plot()
         self.redraw()

@@ -17,10 +17,6 @@ class MatplotlibFrame(ctk.CTkFrame):
         self.canvas_widget = self.canvas.get_tk_widget()
         self.canvas_widget.pack(fill="both", expand=True)
     
-    def power_plot(self):
-        """データをプロットする"""
-        pass
-    
     def redraw(self):
         """再描画"""
         self.canvas.draw()
