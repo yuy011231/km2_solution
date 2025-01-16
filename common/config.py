@@ -1,6 +1,6 @@
 class Config:
     _app_name = "km2 itc solution"
-    _app_initial_window_size = "800x500"
+    _app_initial_window_size = "800x600"
     _font_type = "Helvetica"
 
     @classmethod
