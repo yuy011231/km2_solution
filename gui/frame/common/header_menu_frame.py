@@ -20,4 +20,5 @@ class HeaderMenuFrame(ctk.CTkFrame):
         """
         滴定windowを開くボタンが押されたときのコールバック。
         """
+        self.titration_window.plot()
         self.titration_window.mainloop()

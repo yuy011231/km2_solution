@@ -17,9 +17,6 @@ class BaseWindow(ctk.CTk):
 
         self.geometry(Config.app_initial_window_size()) # size
         self.title("Km2_itc")
-        
-        self.grid_rowconfigure(1, weight=1)
-        self.grid_columnconfigure(0, weight=1)
     
     @abstractmethod  
     def _custom_setup(self):

@@ -23,8 +23,12 @@ class TitrationWindow(BaseWindow):
         self.header_menu_frame = TitrationHeaderMenuFrame(master=self)
         self.header_menu_frame.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
         # scrollable_frame
-        self.scrollable_frame = ctk.CTkScrollableFrame(master=self, width=350, height=400)
-        self.scrollable_frame.grid(row=1, column=0, padx=5, pady=5, sticky="ew")
+        self.scrollable_frame = ctk.CTkScrollableFrame(master=self)
+        self.scrollable_frame.grid(row=1, column=0, padx=5, pady=5, sticky="nsew")
+        
+        self.grid_rowconfigure(0, weight=0)
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_columnconfigure(0, weight=1)
     
     def plot(self):
         if self.itc_file_path is None:

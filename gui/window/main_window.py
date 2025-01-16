@@ -31,6 +31,9 @@ class MainWindow(BaseWindow):
         
         self.tab_frame.add_frame_to_tab("RowData", self.row_data_plot_frame)
         self.tab_frame.add_frame_to_tab("Power", self.power_plot_frame)
+        
+        self.grid_rowconfigure(1, weight=1)
+        self.grid_columnconfigure(0, weight=1)
     
     def km2_svd_row_data_visualize(self, csv_filepath):
         self.row_data_plot_frame.row_data_plot(csv_filepath)
