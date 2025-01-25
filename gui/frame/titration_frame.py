@@ -67,7 +67,8 @@ class TitrationFrame(ctk.CTkFrame):
     def button_analysis_callback(self):
         threshold = int(self.entry.get())
         self.svd_calculator.threshold = threshold
-        self.svd_plotter.peak_noise_plot()
+        self.svd_plotter.peak_plot()
+        self.svd_plotter.noise_plot()
         self.peak_frame.redraw()
         self.noise_frame.redraw()
     
