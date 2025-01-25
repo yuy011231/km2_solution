@@ -25,7 +25,8 @@ class TitrationFrame(ctk.CTkFrame):
             self.noise_frame.ax
         )
         self.svd_plotter.singular_value_plot()
-        self.svd_plotter.peak_noise_plot()
+        self.svd_plotter.peak_plot()
+        self.svd_plotter.noise_plot()
         self.titration_index = titration_index
         
     def setup_control_frame(self):
