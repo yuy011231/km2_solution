@@ -40,5 +40,5 @@ class TitrationWindow(BaseWindow):
         
         self.row_data_plot_frames = [TitrationFrame(master=self.scrollable_frame, width=800, height=600) for _ in range(len(noise_removal_power_dfs))]
         for frame, noise_removal_power_df in zip(self.row_data_plot_frames, noise_removal_power_dfs):
-            frame.pack(padx=5, pady=5)
+            frame.pack(padx=5, pady=5, fill="both", expand=True)
             frame.plot(noise_removal_power_df)

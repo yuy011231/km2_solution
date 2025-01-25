@@ -43,7 +43,7 @@ class TitrationFrame(ctk.CTkFrame):
 
         # 右側のプロットフレーム
         self.titration_plot_frame = TitrationPlotFrame(self, width=600, height=600, **kwargs)
-        self.titration_plot_frame.pack(side="left", padx=10, pady=10)
+        self.titration_plot_frame.pack(side="left", padx=10, pady=10, fill="both", expand=True)
         
     
     def init(self):

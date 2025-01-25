@@ -6,25 +6,20 @@ from common.config import Config
 class FileFrame(ctk.CTkFrame):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        
         self.fonts = (Config.font_type(), 15)
-
-        # フォームのセットアップをする
+        self.textbox = ctk.CTkEntry(master=self, placeholder_text="ITC ファイルを読み込む", width=120, font=self.fonts)
+        self.button_select = ctk.CTkButton(master=self, 
+            fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"),
+            command=self.button_select_callback, text="ファイル選択", font=self.fonts)
+        self.button_open = ctk.CTkButton(master=self, command=self.button_open_callback, text="開く", font=self.fonts)
         self.setup_form()
 
     def setup_form(self):
         self.grid_rowconfigure(1, weight=1)
         self.grid_columnconfigure(0, weight=1)
 
-        self.textbox = ctk.CTkEntry(master=self, placeholder_text="ITC ファイルを読み込む", width=120, font=self.fonts)
         self.textbox.grid(row=1, column=0, padx=10, pady=10, sticky="ew")
-
-        self.button_select = ctk.CTkButton(master=self, 
-            fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"),   # ボタンを白抜きにする
-            command=self.button_select_callback, text="ファイル選択", font=self.fonts)
         self.button_select.grid(row=1, column=1, padx=10, pady=10)
-        
-        self.button_open = ctk.CTkButton(master=self, command=self.button_open_callback, text="開く", font=self.fonts)
         self.button_open.grid(row=1, column=2, padx=10, pady=10)
 
     def button_select_callback(self):
@@ -43,12 +38,7 @@ class FileFrame(ctk.CTkFrame):
         """
         開くボタンが押されたときのコールバック。
         """
-        # ひとまずプロット
-        # 裏で計算準備
-        file_name = self.textbox.get()
-        self.master.set_itc_file_path(file_name)
-        self.master.km2_svd_power_visualize(file_name)
-        self.master.km2_svd_row_data_visualize(file_name)
+        self.master.button_open_callback()
             
     @staticmethod
     def file_read():
