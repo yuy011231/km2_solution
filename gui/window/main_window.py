@@ -1,6 +1,5 @@
-import customtkinter as ctk
-from common.config import Config
 from km2_svd.reader.itc_reader import ItcReader
+from km2_svd.svd_calculator import SvdCalculator
 from gui.frame.common.header_menu_frame import HeaderMenuFrame
 from gui.frame.common.file_frame import FileFrame
 from gui.frame.matplotlib_frame.raw_data_frame import RawDataFrame
@@ -11,6 +10,7 @@ from gui.window.titration_window import TitrationWindow
 class MainWindow(BaseWindow):
     def __init__(self):
         self.reader = None
+        self.svd_calculators = None
         super().__init__()
 
     def _custom_setup(self):
@@ -19,7 +19,7 @@ class MainWindow(BaseWindow):
         tab_names=["RawData", "Power"]
         self.tab_frame = TabFrame(master=self, tab_names=tab_names)
         self.row_data_frame = RawDataFrame(master=self.tab_frame, width=800, height=600)
-        self.titration_window = TitrationWindow()
+        self.titration_window = TitrationWindow(main_window=self)
         
         # main画面のheader
         self.header_menu_frame.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
@@ -57,6 +57,11 @@ class MainWindow(BaseWindow):
     def button_open_callback(self):
         file_name = self.read_file_frame.textbox.get()
         self.reader = ItcReader(file_name)
+        self.svd_calculators = [
+            SvdCalculator(self.reader.get_titration_df(i), 10, 1, 4) 
+            for i 
+            in range(1, self.reader.split_count)
+        ]
         
         self.set_itc_file_path(file_name)
         self.km2_svd_power_visualize()
