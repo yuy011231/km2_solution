@@ -15,9 +15,9 @@ from gui.frame.matplotlib_frame.singular_value_frame import SingularValueFrame
 class TitrationFrame(ctk.CTkFrame):
     def __init__(self, titration_index: int, svd_calculator: SvdCalculator, master, width=800, height=600, **kwargs):
         super().__init__(master, width, height, **kwargs)
+        self.svd_calculator = svd_calculator
         self.setup_control_frame()
         self.setup_visualize_frame()
-        self.svd_calculator = svd_calculator
         self.svd_plotter = SvdPlotter(
             svd_calculator, 
             self.singular_value_frame.ax, 
@@ -41,6 +41,8 @@ class TitrationFrame(ctk.CTkFrame):
             validatecommand=(self.master.register(self._validate_numeric_input), "%d", "%P")
         )
         self.entry.pack(anchor="n", pady=5)
+        self.entry.insert(0, str(self.svd_calculator.threshold))
+        
         # 分析ボタン
         self.button = ctk.CTkButton(
             self.control_frame, text="Analysis", command=self.button_analysis_callback
