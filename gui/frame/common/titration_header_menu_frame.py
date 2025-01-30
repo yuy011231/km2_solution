@@ -2,8 +2,9 @@ from pathlib import Path
 import customtkinter as ctk
 
 class TitrationHeaderMenuFrame(ctk.CTkFrame):
-    def __init__(self, master):
+    def __init__(self, main_window, master):
         super().__init__(master=master)
+        self.main_window = main_window
         
         button_data = [
             {
@@ -21,4 +22,4 @@ class TitrationHeaderMenuFrame(ctk.CTkFrame):
             button.grid(row=0, column=i, padx=5, pady=5)
     
     def _view_titration(self):
-        self.master.plot()
+        self.main_window.km2_svd_peak_noise_diff_visualize()

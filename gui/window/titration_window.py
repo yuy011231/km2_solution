@@ -7,17 +7,17 @@ from gui.frame.common.titration_header_menu_frame import TitrationHeaderMenuFram
 
 class TitrationWindow(BaseWindow):
     def __init__(self, main_window: ctk.CTk):
+        self.main_window = main_window
         super().__init__()
         self.title("titration")
         self.itc_file_path = None
-        self.main_window = main_window
     
     def set_itc_file_path(self, path: Path):
         self.itc_file_path = path
         
     def _custom_setup(self):
         # main画面のheader
-        self.header_menu_frame = TitrationHeaderMenuFrame(master=self)
+        self.header_menu_frame = TitrationHeaderMenuFrame(main_window=self.main_window, master=self)
         self.header_menu_frame.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
         # scrollable_frame
         self.scrollable_frame = ctk.CTkScrollableFrame(master=self)

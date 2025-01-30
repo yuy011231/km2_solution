@@ -3,6 +3,7 @@ from km2_svd.svd_calculator import SvdCalculator
 from gui.frame.common.header_menu_frame import HeaderMenuFrame
 from gui.frame.common.file_frame import FileFrame
 from gui.frame.matplotlib_frame.raw_data_frame import RawDataFrame
+from gui.frame.matplotlib_frame.peak_noise_diff_data_frame import PeakNoiseDiffDataFrame
 from gui.frame.tab_frame import TabFrame
 from gui.window.base_window import BaseWindow
 from gui.window.titration_window import TitrationWindow
@@ -16,9 +17,10 @@ class MainWindow(BaseWindow):
     def _custom_setup(self):
         self.header_menu_frame = HeaderMenuFrame(master=self)
         self.read_file_frame = FileFrame(master=self)
-        tab_names=["RawData", "Power"]
+        tab_names=["RawData", "PeakNoiseDiffData"]
         self.tab_frame = TabFrame(master=self, tab_names=tab_names)
         self.row_data_frame = RawDataFrame(master=self.tab_frame, width=800, height=600)
+        self.peak_noise_diff_data_frame = PeakNoiseDiffDataFrame(master=self.tab_frame, width=800, height=600)
         self.titration_window = TitrationWindow(main_window=self)
         
         # main画面のheader
@@ -29,9 +31,11 @@ class MainWindow(BaseWindow):
         self.tab_frame.grid(row=2, column=0, padx=5, pady=5, sticky="nsew")
         # km2_svd出力表示用
         self.row_data_frame.init()
+        self.peak_noise_diff_data_frame.init()
         
         # tabにフレームを追加
         self.tab_frame.add_frame_to_tab("RawData", self.row_data_frame)
+        self.tab_frame.add_frame_to_tab("PeakNoiseDiffData", self.peak_noise_diff_data_frame)
         
         self.grid_rowconfigure(0, weight=1)
         self.grid_rowconfigure(1, weight=1)
@@ -41,9 +45,8 @@ class MainWindow(BaseWindow):
     def km2_svd_row_data_visualize(self):
         self.row_data_frame.plot()
     
-    def km2_svd_power_visualize(self):
-        # self.power_plot_frame.power_plot(10)
-        pass
+    def km2_svd_peak_noise_diff_visualize(self):
+        self.peak_noise_diff_data_frame.plot()
         
     def set_itc_file_path(self, path):
         self.titration_window.set_itc_file_path(path)
@@ -64,5 +67,4 @@ class MainWindow(BaseWindow):
         ]
         
         self.set_itc_file_path(file_name)
-        self.km2_svd_power_visualize()
         self.km2_svd_row_data_visualize()
