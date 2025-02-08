@@ -11,7 +11,8 @@ class FileFrame(ctk.CTkFrame):
         self.button_select = ctk.CTkButton(master=self, 
             fg_color="transparent", border_width=2, text_color=("gray10", "#DCE4EE"),
             command=self.button_select_callback, text="ファイル選択", font=self.fonts)
-        self.button_open = ctk.CTkButton(master=self, command=self.button_open_callback, text="開く", font=self.fonts)
+        self.button_open = ctk.CTkButton(master=self, command=self.button_open_callback, text="Open", font=self.fonts)
+        self.button_open.configure(state="disabled")
         self.setup_form()
 
     def setup_form(self):
@@ -33,6 +34,7 @@ class FileFrame(ctk.CTkFrame):
             # ファイルパスをテキストボックスに記入
             self.textbox.delete(0, tk.END)
             self.textbox.insert(0, file_name)
+            self.button_open.configure(state="normal")
 
     def button_open_callback(self):
         """

@@ -48,7 +48,7 @@ class TitrationWindow(BaseWindow):
             return
         
         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-        output_path=Path(file_path) / timestamp
+        output_path=Path(file_path) / f"{timestamp}_titration"
         output_path.mkdir(parents=True, exist_ok=True)
         for frame in self.svd_plot_frames:
             titration_dir=output_path / f"{frame.titration_index}"

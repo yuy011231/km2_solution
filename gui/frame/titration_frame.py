@@ -1,9 +1,4 @@
-from typing import Sequence
-
-import pandas as pd
 import customtkinter as ctk
-from gui.frame.matplotlib_frame.matplotlib_frame import MatplotlibFrame
-from km2_svd.reader.itc_reader import ItcReader
 from km2_svd.svd_calculator import SvdCalculator
 from km2_svd.plotter.plotter import SvdPlotter
 
