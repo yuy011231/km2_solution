@@ -55,3 +55,4 @@ class TitrationWindow(BaseWindow):
             titration_dir.mkdir(parents=True, exist_ok=True)
             # TODO: ピーク/ノイズ/ベースライン成分csv
             frame.svd_plotter.save_fig(titration_dir)
+            frame.svd_plotter.save_csv(titration_dir)

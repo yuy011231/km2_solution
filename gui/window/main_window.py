@@ -22,7 +22,7 @@ class MainWindow(BaseWindow):
         self.read_file_frame = FileFrame(master=self)
         tab_names=["RawData", "PeakNoiseDiffData"]
         self.tab_frame = TabFrame(master=self, tab_names=tab_names)
-        self.row_data_frame = RawDataFrame(master=self.tab_frame, width=800, height=600)
+        self.raw_data_frame = RawDataFrame(master=self.tab_frame, width=800, height=600)
         self.peak_noise_diff_data_frame = PeakNoiseDiffDataFrame(master=self.tab_frame, width=800, height=600)
         self.titration_window = TitrationWindow(main_window=self)
         
@@ -33,11 +33,11 @@ class MainWindow(BaseWindow):
         # tab view
         self.tab_frame.grid(row=2, column=0, padx=5, pady=5, sticky="nsew")
         # km2_svd出力表示用
-        self.row_data_frame.init()
+        self.raw_data_frame.init()
         self.peak_noise_diff_data_frame.init()
         
         # tabにフレームを追加
-        self.tab_frame.add_frame_to_tab("RawData", self.row_data_frame)
+        self.tab_frame.add_frame_to_tab("RawData", self.raw_data_frame)
         self.tab_frame.add_frame_to_tab("PeakNoiseDiffData", self.peak_noise_diff_data_frame)
         
         self.grid_rowconfigure(0, weight=1)
@@ -46,7 +46,7 @@ class MainWindow(BaseWindow):
         self.grid_columnconfigure(0, weight=1)
     
     def km2_svd_row_data_visualize(self):
-        self.row_data_frame.plot()
+        self.raw_data_frame.plot()
     
     def km2_svd_peak_noise_diff_visualize(self):
         self.peak_noise_diff_data_frame.plot()
@@ -69,7 +69,8 @@ class MainWindow(BaseWindow):
         output_path=Path(file_path) / f"{timestamp}_main"
         output_path.mkdir(parents=True, exist_ok=True)
         
-        self.row_data_frame.plotter.save_fig(output_path / "row_data.png")
+        self.raw_data_frame.plotter.save_fig(output_path / "row_data.png")
+        self.raw_data_frame.plotter.save_csv(output_path)
         self.peak_noise_diff_data_frame.plotter.save_fig(output_path / "peak_noise_diff_data.png")
     
     # fileフレームのコールバック
@@ -81,7 +82,7 @@ class MainWindow(BaseWindow):
             for i 
             in range(1, self.reader.split_count)
         ]
-        self.row_data_frame.set_plotter()
+        self.raw_data_frame.set_plotter()
         self.peak_noise_diff_data_frame.set_plotter()
         self.set_itc_file_path(file_name)
         self.km2_svd_row_data_visualize()
