@@ -1,8 +1,6 @@
 from abc import abstractmethod
 import customtkinter as ctk
 from common.config import Config
-from gui.frame.common.file_frame import FileFrame
-from gui.frame.matplotlib_frame.km2_svd_frame import Km2SvdFrame
 
 class BaseWindow(ctk.CTk):
     def __init__(self):

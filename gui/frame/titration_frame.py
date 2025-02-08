@@ -1,13 +1,9 @@
-from typing import Sequence
-
-import pandas as pd
 import customtkinter as ctk
-from gui.frame.matplotlib_frame.matplotlib_frame import MatplotlibFrame
-from km2_svd.reader.itc_reader import ItcReader
 from km2_svd.svd_calculator import SvdCalculator
 from km2_svd.plotter.plotter import SvdPlotter
 
 from gui.frame.matplotlib_frame.noise_frame import NoiseFrame
+from gui.frame.matplotlib_frame.peak_baseline_frame import PeakBaselineFrame
 from gui.frame.matplotlib_frame.peak_frame import PeakFrame
 from gui.frame.matplotlib_frame.singular_value_frame import SingularValueFrame
 
@@ -22,7 +18,8 @@ class TitrationFrame(ctk.CTkFrame):
             svd_calculator, 
             self.singular_value_frame.ax, 
             self.peak_frame.ax, 
-            self.noise_frame.ax
+            self.noise_frame.ax,
+            self.peak_baseline_frame.ax
         )
         self.svd_plotter.singular_value_plot()
         self.svd_plotter.peak_plot()
@@ -61,6 +58,9 @@ class TitrationFrame(ctk.CTkFrame):
         # 特異値フレーム
         self.singular_value_frame = SingularValueFrame(master=self.visualize_frame)
         self.singular_value_frame.grid(row=0, column=1, rowspan=2, padx=10, pady=10, sticky="nsew")
+        # ベースラインフレーム
+        self.peak_baseline_frame = PeakBaselineFrame(master=self.visualize_frame)
+        # self.peak_baseline_frame.grid(row=0, column=1, rowspan=2, padx=10, pady=10, sticky="nsew")
         
         self.visualize_frame.grid_rowconfigure(0, weight=1)
         self.visualize_frame.grid_rowconfigure(1, weight=1)

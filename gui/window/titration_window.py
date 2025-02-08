@@ -1,4 +1,6 @@
+from datetime import datetime
 from pathlib import Path
+from tkinter import filedialog
 import customtkinter as ctk
 from gui.window.base_window import BaseWindow
 from gui.frame.titration_frame import TitrationFrame
@@ -16,7 +18,7 @@ class TitrationWindow(BaseWindow):
         self.itc_file_path = path
         
     def _custom_setup(self):
-        # main画面のheader
+        # header
         self.header_menu_frame = TitrationHeaderMenuFrame(main_window=self.main_window, master=self)
         self.header_menu_frame.grid(row=0, column=0, padx=5, pady=5, sticky="ew")
         # scrollable_frame
@@ -38,3 +40,18 @@ class TitrationWindow(BaseWindow):
         ]
         for frame in self.svd_plot_frames:
             frame.pack(padx=5, pady=5, fill="both", expand=True)
+    
+    def save_titration_plot(self):
+        file_path = filedialog.askdirectory(title="保存先のフォルダを選択")
+        
+        if not file_path:
+            return
+        
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        output_path=Path(file_path) / f"{timestamp}_titration"
+        output_path.mkdir(parents=True, exist_ok=True)
+        for frame in self.svd_plot_frames:
+            titration_dir=output_path / f"{frame.titration_index}"
+            titration_dir.mkdir(parents=True, exist_ok=True)
+            # TODO: ピーク/ノイズ/ベースライン成分csv
+            frame.svd_plotter.save_fig(titration_dir)

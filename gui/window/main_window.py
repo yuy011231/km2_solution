@@ -1,3 +1,6 @@
+from datetime import datetime
+from pathlib import Path
+from tkinter import filedialog
 from km2_svd.reader.itc_reader import ItcReader
 from km2_svd.svd_calculator import SvdCalculator
 from gui.frame.common.header_menu_frame import HeaderMenuFrame
@@ -56,6 +59,19 @@ class MainWindow(BaseWindow):
         self.titration_window.plot()
         self.titration_window.mainloop()
     
+    def button_save_fig_callback(self):
+        file_path = filedialog.askdirectory(title="保存先のフォルダを選択")
+        
+        if not file_path:
+            return
+        
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        output_path=Path(file_path) / f"{timestamp}_main"
+        output_path.mkdir(parents=True, exist_ok=True)
+        
+        self.row_data_frame.plotter.save_fig(output_path / "row_data.png")
+        self.peak_noise_diff_data_frame.plotter.save_fig(output_path / "peak_noise_diff_data.png")
+    
     # fileフレームのコールバック
     def button_open_callback(self):
         file_name = self.read_file_frame.textbox.get()
@@ -65,6 +81,8 @@ class MainWindow(BaseWindow):
             for i 
             in range(1, self.reader.split_count)
         ]
-        
+        self.row_data_frame.set_plotter()
+        self.peak_noise_diff_data_frame.set_plotter()
         self.set_itc_file_path(file_name)
         self.km2_svd_row_data_visualize()
+        self.header_menu_frame.enable_buttons()
