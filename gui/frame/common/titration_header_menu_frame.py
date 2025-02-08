@@ -10,6 +10,10 @@ class TitrationHeaderMenuFrame(ctk.CTkFrame):
             {
                 "text": "Analysis",
                 "command": self._view_titration
+            },
+            {
+                "text": "Save",
+                "command": self._save_titration
             }
         ]
         
@@ -23,3 +27,6 @@ class TitrationHeaderMenuFrame(ctk.CTkFrame):
     
     def _view_titration(self):
         self.main_window.km2_svd_peak_noise_diff_visualize()
+        
+    def _save_titration(self):
+        self.master.save_titration_plot()
