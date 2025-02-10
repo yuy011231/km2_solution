@@ -6,7 +6,7 @@ from km2_svd.svd_calculator import SvdCalculator
 from gui.frame.common.header_menu_frame import HeaderMenuFrame
 from gui.frame.common.file_frame import FileFrame
 from gui.frame.matplotlib_frame.raw_data_frame import RawDataFrame
-from gui.frame.matplotlib_frame.peak_noise_diff_data_frame import PeakBaselineDiffDataFrame
+from gui.frame.matplotlib_frame.peak_baseline_diff_data_frame import PeakBaselineDiffDataFrame
 from gui.frame.tab_frame import TabFrame
 from gui.window.base_window import BaseWindow
 from gui.window.titration_window import TitrationWindow
