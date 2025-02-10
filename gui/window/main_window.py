@@ -6,7 +6,7 @@ from km2_svd.svd_calculator import SvdCalculator
 from gui.frame.common.header_menu_frame import HeaderMenuFrame
 from gui.frame.common.file_frame import FileFrame
 from gui.frame.matplotlib_frame.raw_data_frame import RawDataFrame
-from gui.frame.matplotlib_frame.peak_noise_diff_data_frame import PeakNoiseDiffDataFrame
+from gui.frame.matplotlib_frame.peak_baseline_diff_data_frame import PeakBaselineDiffDataFrame
 from gui.frame.tab_frame import TabFrame
 from gui.window.base_window import BaseWindow
 from gui.window.titration_window import TitrationWindow
@@ -23,7 +23,7 @@ class MainWindow(BaseWindow):
         tab_names=["RawData", "PeakNoiseDiffData"]
         self.tab_frame = TabFrame(master=self, tab_names=tab_names)
         self.raw_data_frame = RawDataFrame(master=self.tab_frame, width=800, height=600)
-        self.peak_noise_diff_data_frame = PeakNoiseDiffDataFrame(master=self.tab_frame, width=800, height=600)
+        self.peak_noise_diff_data_frame = PeakBaselineDiffDataFrame(master=self.tab_frame, width=800, height=600)
         self.titration_window = TitrationWindow(main_window=self)
         
         # main画面のheader
