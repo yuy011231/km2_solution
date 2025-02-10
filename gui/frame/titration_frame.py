@@ -29,22 +29,47 @@ class TitrationFrame(ctk.CTkFrame):
     def setup_control_frame(self):
         self.control_frame = ctk.CTkFrame(self)
         self.control_frame.pack(side="left", fill="y", padx=10, pady=10)
-        # 数値入力用テキストボックス
-        self.entry = ctk.CTkEntry(
+
+        # 採用特異値
+        self.label_singular = ctk.CTkLabel(self.control_frame, text="採用特異値 0~")
+        self.label_singular.grid(row=0, column=0, padx=10, pady=10, sticky="w")
+        self.entry_singular = ctk.CTkEntry(
             master=self.control_frame,
             width=100,
             placeholder_text="数値を入力",
             validate="key",
             validatecommand=(self.master.register(self._validate_numeric_input), "%d", "%P")
         )
-        self.entry.pack(anchor="n", pady=5)
-        self.entry.insert(0, str(self.svd_calculator.threshold))
+        self.entry_singular.grid(row=1, column=0, padx=10, pady=10)
+
+        # ピーク開始地点
+        self.label_peak_start = ctk.CTkLabel(self.control_frame, text="ピーク開始地点")
+        self.label_peak_start.grid(row=2, column=0, padx=10, pady=10, sticky="w")
+        self.entry_peak_start = ctk.CTkEntry(self.control_frame, width=100)
+        self.entry_peak_start.grid(row=3, column=0, padx=10, pady=10)
+
+        # ピーク終了地点
+        self.label_peak_end = ctk.CTkLabel(self.control_frame, text="ピーク終了地点")
+        self.label_peak_end.grid(row=4, column=0, padx=10, pady=10, sticky="w")
+        self.entry_peak_end = ctk.CTkEntry(self.control_frame, width=100)
+        self.entry_peak_end.grid(row=5, column=0, padx=10, pady=10)
+
+        # ラジオボタンの選択変数
+        self.fit_type = ctk.StringVar(value="linear")  # デフォルト: 一次フィッティング
+
+        # 一次フィッティングのラジオボタン
+        self.radio_linear = ctk.CTkRadioButton(self.control_frame, text="一次フィッティング", variable=self.fit_type, value="linear")
+        self.radio_linear.grid(row=6, column=0, padx=10, pady=5, sticky="w")
+
+        # 二次フィッティングのラジオボタン
+        self.radio_quadratic = ctk.CTkRadioButton(self.control_frame, text="二次フィッティング", variable=self.fit_type, value="quadratic")
+        self.radio_quadratic.grid(row=7, column=0, padx=10, pady=5, sticky="w")
         
         # 分析ボタン
         self.button = ctk.CTkButton(
             self.control_frame, text="Analysis", command=self.button_analysis_callback
         )
-        self.button.pack(anchor="n", pady=5)
+        self.button.grid(row=8, column=0, padx=10, pady=5, sticky="w")
     
     def setup_visualize_frame(self):
         self.visualize_frame = ctk.CTkFrame(self)
