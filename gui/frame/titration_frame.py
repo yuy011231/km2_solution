@@ -125,6 +125,7 @@ class TitrationFrame(ctk.CTkFrame):
         self.svd_plotter.peak_baseline_plot()
         self.peak_frame.redraw()
         self.noise_frame.redraw()
+        self.peak_baseline_frame.redraw()
     
     def _validate_numeric_input(self, action, value_if_allowed):
         if action == "1":
