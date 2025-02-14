@@ -89,10 +89,10 @@ class TitrationFrame(ctk.CTkFrame):
         self.singular_frame = ctk.CTkFrame(self)
         # ピークフレーム
         self.peak_frame = PeakFrame(master=self.peak_noise_frame)
-        self.peak_frame.pack(side="top", fill="both", expand=False, padx=10, pady=5)
+        self.peak_frame.pack(side="top", fill="both", expand=True, padx=10, pady=5)
         # ノイズフレーム
         self.noise_frame = NoiseFrame(master=self.peak_noise_frame)
-        self.noise_frame.pack(side="top", fill="both", expand=False, padx=10, pady=5)
+        self.noise_frame.pack(side="top", fill="both", expand=True, padx=10, pady=5)
         # 特異値フレーム
         self.singular_value_frame = SingularValueFrame(master=self.singular_frame)
         self.singular_value_frame.pack(fill="both", expand=True, padx=10, pady=10)

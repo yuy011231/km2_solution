@@ -8,11 +8,9 @@ class MatplotlibFrame(ctk.CTkFrame):
         self.width = width
         self.height = height
         
-        # MatplotlibのFigureを作成
-        self.figure = Figure(figsize=(self.width / 100, self.height / 100), dpi=100)
-        self.ax = self.figure.add_subplot(111)  # 1x1プロット領域
+        self.figure = Figure(figsize=(self.width / 100, self.height / 100), dpi=100, constrained_layout=True)
+        self.ax = self.figure.add_subplot(111)
         
-        # FigureCanvasTkAggを使用してTkinterに埋め込む
         self.canvas = FigureCanvasTkAgg(self.figure, self)
         self.canvas_widget = self.canvas.get_tk_widget()
         self.canvas_widget.pack(fill="both", expand=True)
